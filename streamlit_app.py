@@ -126,15 +126,17 @@ if st.button("Predict Loan Status"):
     if prediction[0] == 1:
         st.success(f"**Loan Status: Approved! 🎉**")
         st.write(f"Confidence (Approved): **{prediction_proba[0][1]*100:.2f}%**")
+        
         st.write(f"Confidence (Rejected): {prediction_proba[0][0]*100:.2f}%")
     else:
         st.error(f"**Loan Status: Rejected 😔**")
         st.write(f"Confidence (Rejected): **{prediction_proba[0][0]*100:.2f}%**")
         st.write(f"Confidence (Approved): {prediction_proba[0][1]*100:.2f}%")
 
-    st.markdown("---")
-    st.markdown("#### Input Details Provided:")
-    st.dataframe(input_data)
+#     st.markdown("---")
+#     st.markdown("#### Input Details Provided:")
+#     st.dataframe(input_data)
 
 st.markdown("---")
-st.markdown("Developed with ❤️ using Streamlit")
+st.markdown("Developed with ❤️ by Sandesh")
+st.markdown("This web app is intended for educational purposes only. It should not be constituted as a real predictor or relied upon for making decisions.")
