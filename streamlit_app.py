@@ -62,11 +62,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 model = train_model(X_train, y_train)
 
 # Display model performance (optional, for informational purposes)
-st.sidebar.header("Model Performance")
+st.sidebar.header("Model Performance & Metrics")
 test_score = model.score(X_test, y_test)
 st.sidebar.write(f"Model's Accuracy on Test Set: **{test_score*100:.2f}%**")
 cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
-st.sidebar.write(f"Model's 20 Cross Validation score on Test Set: **{np.mean(cross_score)*100:.2f}%**")
+st.sidebar.write(f"Model's 20 CV score on Test Set: **{np.mean(cross_score)*100:.2f}%**")
+
 
 st.header("Enter Applicant Details:")
 
