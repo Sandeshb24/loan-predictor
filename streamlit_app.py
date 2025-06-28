@@ -69,7 +69,7 @@ cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
 st.sidebar.write(f"Model's 20 CV score on Test Set: **{np.mean(cross_score)*100:.2f}%**")
 y_preds = model.predict(X_test)
 
-st.sidebar.write(pd.crosstab(y_test,y_preds,rownames = ["Actual Labels"], colnames = ["Predicted Labels"]))
+st.sidebar.write(f"Confusion Matrix: {pd.crosstab(y_test,y_preds,rownames = ["Actual Labels"], colnames = ["Predicted Labels"])}")
 st.header("Enter Applicant Details:")
 
 # Input fields for user
@@ -141,7 +141,7 @@ if st.button("Predict Loan Status"):
 #     st.markdown("#### Input Details Provided:")
 #     st.dataframe(input_data)
 
-st.write("cross_score")
+
 st.markdown("---")
 st.markdown("#### Developed with ❤️ by Sandesh")
 st.markdown("This web app is intended for educational purposes only. It should not be constituted as a real predictor or relied upon for making decisions.")
