@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
-
+from sklearn.metrics import confusion_matrix
 def load_and_preprocess_data(file_path="https://raw.githubusercontent.com/Sandeshb24/loan-predictor/refs/heads/main/loan_approval_dataset.csv"):
     """
     Loads the loan approval dataset and performs necessary preprocessing.
@@ -67,7 +67,10 @@ test_score = model.score(X_test, y_test)
 st.sidebar.write(f"Model's Accuracy on Test Set: **{test_score*100:.2f}%**")
 cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
 st.sidebar.write(f"Model's 20 CV score on Test Set: **{np.mean(cross_score)*100:.2f}%**")
-
+y_preds = model.predict(X_test)
+confusion_matrix(y_test,y_preds)
+st.sidebar.write(pd.crosstab(y_test,y_preds,rownames = ["Actual Labels"],
+           colnames = ["Predicted Labels"]))
 
 st.header("Enter Applicant Details:")
 
@@ -142,5 +145,5 @@ if st.button("Predict Loan Status"):
 
 st.write("cross_score")
 st.markdown("---")
-st.markdown("### Developed with ❤️ by Sandesh")
+st.markdown("#### Developed with ❤️ by Sandesh")
 st.markdown("This web app is intended for educational purposes only. It should not be constituted as a real predictor or relied upon for making decisions.")
