@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_val_score
 
 def load_and_preprocess_data(file_path="https://raw.githubusercontent.com/Sandeshb24/loan-predictor/refs/heads/main/loan_approval_dataset.csv"):
     """
@@ -65,3 +65,76 @@ model = train_model(X_train, y_train)
 st.sidebar.header("Model Performance")
 test_score = model.score(X_test, y_test)
 st.sidebar.write(f"Model Accuracy on Test Set: **{test_score*100:.2f}%**")
+
+st.header("Enter Applicant Details:")
+
+# Input fields for user
+col1, col2 = st.columns(2)
+
+with col1:
+    no_of_dependents = st.slider("Number of Dependents", 0, 5, 2)
+    education = st.selectbox("Education", ("Graduate", "Not Graduate"))
+    income_annum = st.number_input("Annual Income (in ₹)", min_value=0, value=5000000, step=100000)
+    loan_amount = st.number_input("Loan Amount (in ₹)", min_value=0, value=15000000, step=100000)
+    residential_assets_value = st.number_input("Residential Assets Value (in ₹)", min_value=0, value=2000000, step=100000)
+    luxury_assets_value = st.number_input("Luxury Assets Value (in ₹)", min_value=0, value=10000000, step=100000)
+
+
+with col2:
+    self_employed = st.selectbox("Self Employed", ("No", "Yes"))
+    loan_term = st.slider("Loan Term (in Years)", 2, 20, 10)
+    cibil_score = st.slider("CIBIL Score", 300, 900, 700)
+    commercial_assets_value = st.number_input("Commercial Assets Value (in ₹)", min_value=0, value=1000000, step=100000)
+    bank_asset_value = st.number_input("Bank Asset Value (in ₹)", min_value=0, value=500000, step=100000)
+
+
+# Map categorical inputs to numerical for prediction
+education_binary_input = 1 if education == "Graduate" else 0
+self_employed_binary_input = 1 if self_employed == "Yes" else 0
+
+# Create a DataFrame for the new input
+input_data = pd.DataFrame([[
+    no_of_dependents,
+    income_annum,
+    loan_amount,
+    loan_term,
+    cibil_score,
+    residential_assets_value,
+    commercial_assets_value,
+    luxury_assets_value,
+    bank_asset_value,
+    education_binary_input, # mapped education
+    self_employed_binary_input # mapped self_employed
+]], columns=[
+    'no_of_dependents', 'income_annum', 'loan_amount', 'loan_term',
+    'cibil_score', 'residential_assets_value', 'commercial_assets_value',
+    'luxury_assets_value', 'bank_asset_value', 'education_binary',
+    'self_employed_binary'
+])
+
+
+# Ensure the column order matches the training data (X)
+# This is crucial for correct predictions
+input_data = input_data[X.columns]
+
+
+if st.button("Predict Loan Status"):
+    prediction = model.predict(input_data)
+    prediction_proba = model.predict_proba(input_data)
+
+    st.subheader("Prediction Result:")
+    if prediction[0] == 1:
+        st.success(f"**Loan Status: Approved! 🎉**")
+        st.write(f"Confidence (Approved): **{prediction_proba[0][1]*100:.2f}%**")
+        st.write(f"Confidence (Rejected): {prediction_proba[0][0]*100:.2f}%")
+    else:
+        st.error(f"**Loan Status: Rejected 😔**")
+        st.write(f"Confidence (Rejected): **{prediction_proba[0][0]*100:.2f}%**")
+        st.write(f"Confidence (Approved): {prediction_proba[0][1]*100:.2f}%")
+
+    st.markdown("---")
+    st.markdown("#### Input Details Provided:")
+    st.dataframe(input_data)
+
+st.markdown("---")
+st.markdown("Developed with ❤️ using Streamlit")
