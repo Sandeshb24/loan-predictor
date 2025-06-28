@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 st.title("Loan predictor App")
 
-def load_and_preprocess_data(file_path="loan_approval_dataset.csv"):
+def load_and_preprocess_data(file_path="https://raw.githubusercontent.com/Sandeshb24/loan-predictor/refs/heads/main/loan_approval_dataset.csv"):
     """
     Loads the loan approval dataset and performs necessary preprocessing.
     """
