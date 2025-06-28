@@ -1,6 +1,6 @@
-# 🎈 Blank app template
+# 🎈 Loan Approval Predictor
 
-A simple Streamlit app template for you to modify!
+A classifier app to predict wether your loan will be approved or not!
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
