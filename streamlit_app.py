@@ -38,3 +38,17 @@ def load_and_preprocess_data(file_path="https://raw.githubusercontent.com/Sandes
     y = cleaned_loan_data["loan_status_binary"]
 
     return X, y
+    
+@st.cache_resource # Cache the model training
+def train_model(X_train, y_train):
+    """
+    Trains the RandomForestClassifier model.
+    """
+    model = RandomForestClassifier(random_state=42) # Added random_state for reproducibility
+    model.fit(X_train, y_train)
+    return model
+
+st.set_page_config(page_title="Loan Approval Predictor", layout="centered")
+
+st.title("💰 Loan Approval Predictor")
+st.markdown("### Predict if a loan will be approved based on applicant's details.")
