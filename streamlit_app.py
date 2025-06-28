@@ -2,7 +2,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-st.title("Loan predictor App")
+
 
 def load_and_preprocess_data(file_path="https://raw.githubusercontent.com/Sandeshb24/loan-predictor/refs/heads/main/loan_approval_dataset.csv"):
     """
@@ -52,3 +52,16 @@ st.set_page_config(page_title="Loan Approval Predictor", layout="centered")
 
 st.title("💰 Loan Approval Predictor")
 st.markdown("### Predict if a loan will be approved based on applicant's details.")
+# Load and preprocess data
+X, y = load_and_preprocess_data()
+
+# Split data for training
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the model
+model = train_model(X_train, y_train)
+
+# Display model performance (optional, for informational purposes)
+st.sidebar.header("Model Performance")
+test_score = model.score(X_test, y_test)
+st.sidebar.write(f"Model Accuracy on Test Set: **{test_score*100:.2f}%**")
