@@ -64,7 +64,9 @@ model = train_model(X_train, y_train)
 # Display model performance (optional, for informational purposes)
 st.sidebar.header("Model Performance")
 test_score = model.score(X_test, y_test)
-st.sidebar.write(f"Model Accuracy on Test Set: **{test_score*100:.2f}%**")
+st.sidebar.write(f"Model's Accuracy on Test Set: **{test_score*100:.2f}%**")
+cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
+st.sidebar.write(f"Model's 20 Cross Validation score on Test Set: **{cross_score*100:.2f}%**")
 
 st.header("Enter Applicant Details:")
 
@@ -136,7 +138,7 @@ if st.button("Predict Loan Status"):
 #     st.markdown("---")
 #     st.markdown("#### Input Details Provided:")
 #     st.dataframe(input_data)
-cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
+
 st.write("cross_score")
 st.markdown("---")
 st.markdown("### Developed with ❤️ by Sandesh")
