@@ -136,7 +136,8 @@ if st.button("Predict Loan Status"):
 #     st.markdown("---")
 #     st.markdown("#### Input Details Provided:")
 #     st.dataframe(input_data)
-
+cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
+st.write("cross_score")
 st.markdown("---")
 st.markdown("### Developed with ❤️ by Sandesh")
 st.markdown("This web app is intended for educational purposes only. It should not be constituted as a real predictor or relied upon for making decisions.")
