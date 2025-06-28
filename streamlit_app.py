@@ -138,5 +138,5 @@ if st.button("Predict Loan Status"):
 #     st.dataframe(input_data)
 
 st.markdown("---")
-st.markdown("Developed with ❤️ by Sandesh")
+st.markdown("###Developed with ❤️ by Sandesh")
 st.markdown("This web app is intended for educational purposes only. It should not be constituted as a real predictor or relied upon for making decisions.")
