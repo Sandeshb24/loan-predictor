@@ -68,8 +68,7 @@ st.sidebar.write(f"Model's Accuracy on Test Set: **{test_score*100:.2f}%**")
 cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
 st.sidebar.write(f"Model's 20 CV score on Test Set: **{np.mean(cross_score)*100:.2f}%**")
 y_preds = model.predict(X_test)
-
-st.sidebar.write(f"Confusion Matrix: {pd.crosstab(y_test,y_preds,rownames = ["Actual Labels"], colnames = ["Predicted Labels"])}")
+st.sidebar.write( {pd.crosstab(y_test,y_preds,rownames = ["Actual Labels"], colnames = ["Predicted Labels"]))
 st.header("Enter Applicant Details:")
 
 # Input fields for user
