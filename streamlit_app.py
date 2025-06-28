@@ -66,7 +66,7 @@ st.sidebar.header("Model Performance")
 test_score = model.score(X_test, y_test)
 st.sidebar.write(f"Model's Accuracy on Test Set: **{test_score*100:.2f}%**")
 cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
-st.sidebar.write(f"Model's 20 Cross Validation score on Test Set: **{cross_score*100:.2f}%**")
+st.sidebar.write(f"Model's 20 Cross Validation score on Test Set: **{np.mean(cross_score)*100:.2f}%**")
 
 st.header("Enter Applicant Details:")
 
