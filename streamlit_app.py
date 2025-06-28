@@ -20,3 +20,4 @@ from sklearn.model_selection import train_test_split
 
 from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import cross_val_score;
+loan_data = pd.read_csv("loan_approval_dataset.csv")
