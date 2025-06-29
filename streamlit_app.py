@@ -5,6 +5,8 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import ConfusionMatrixDisplay
 from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+
 def load_and_preprocess_data(file_path="https://raw.githubusercontent.com/Sandeshb24/loan-predictor/refs/heads/main/loan_approval_dataset.csv"):
     """
     Loads the loan approval dataset and performs necessary preprocessing.
@@ -140,9 +142,10 @@ if st.button("Predict Loan Status"):
         st.write(f"Confidence (Rejected): **{prediction_proba[0][0]*100:.2f}%**")
         st.write(f"Confidence (Approved): {prediction_proba[0][1]*100:.2f}%")
 
-#     st.markdown("---")
-#     st.markdown("#### Input Details Provided:")
-#     st.dataframe(input_data)
+    st.markdown("---")
+    st.markdown("#### Model report")
+    st.markdown(y_test,y_preds)
+    # st.dataframe(input_data)
 
 
 st.markdown("---")
