@@ -144,7 +144,7 @@ if st.button("Predict Loan Status"):
 
     st.markdown("---")
     st.markdown("#### Model report")
-    st.markdown(y_test,y_preds)
+    st.markdown(classification_report(y_test,y_preds))
     # st.dataframe(input_data)
 
 
