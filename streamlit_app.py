@@ -69,7 +69,7 @@ cross_score = cross_val_score(model,X,y,cv = 20, scoring= None)
 st.sidebar.write(f"Model's 20 CV score on Test Set: **{np.mean(cross_score)*100:.2f}%**")
 y_preds = model.predict(X_test)
 st.sidebar.write("Confusion Matrix:")
-st.sidebar.write(pd.crosstab(y_test,y_preds,rownames = ["Actual Labels"],colnames = ["Predicted Labels"]))
+st.sidebar.write(ConfusionMatrixDisplay.from_estimator(estimator = model, X=X, y=y))
 
 
 st.header("Enter Applicant Details:")
