@@ -142,9 +142,9 @@ if st.button("Predict Loan Status"):
         st.write(f"Confidence (Rejected): **{prediction_proba[0][0]*100:.2f}%**")
         st.write(f"Confidence (Approved): {prediction_proba[0][1]*100:.2f}%")
 
-    st.markdown("---")
-    st.markdown("#### Model report")
-    st.markdown(classification_report(y_test,y_preds))
+st.markdown("---")
+st.markdown("#### Model report")
+st.markdown(classification_report(y_test,y_preds))
     # st.dataframe(input_data)
 
 
